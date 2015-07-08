@@ -28,6 +28,8 @@ namespace myun2
 							tokens.push_back(token);
 							token_started = p;
 						}
+						if ( is_split_char(c) )
+							token_started = p + 1;
 					}
 					p++;
 				}
