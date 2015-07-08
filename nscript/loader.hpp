@@ -27,8 +27,12 @@ namespace myun2
 				return true;
 			}
 			long file_size(FILE* fp) {
+				long origin = ftell(fp);
 				fseek(fp, 0, SEEK_END);
-				return ftell(fp); }
+				size = ftell(fp);
+				fseek(fp, origin, SEEK_SET);
+				return size;
+			}
 			void allocate(long size) {
 				buffer = ::std::string(size + 1, '\0');
 			}
