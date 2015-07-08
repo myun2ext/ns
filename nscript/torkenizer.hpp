@@ -11,12 +11,16 @@ namespace myun2
 		class torkenizer
 		{
 		public:
+			typedef ::std::vector<::std::string> token_list_type, token_list;
 			bool parse(const char* data)
 			{
+				token_list_type tokens;
 				const char* p = data;
-				while(*p != '\0')
-				{
+				const char* started = data;
 
+				while((char c = *p) != '\0')
+				{
+					if ( is_split_char(c
 					p++;
 				}
 			}
