@@ -14,7 +14,8 @@ namespace myun2
 			::std::string buffer;
 			long size;
 		public:
-			loader(const char* path) { load(path); }
+			struct load_failed {};
+			loader(const char* path) { if (!load(path)) throw load_failed(); }
 			bool load(const char* path)
 			{
 				FILE *fp = fopen(path, "r");
