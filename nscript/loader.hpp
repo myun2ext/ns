@@ -11,7 +11,7 @@ namespace myun2
 		class loader
 		{
 		private:
-			::std::string data;
+			::std::string buffer;
 			long size;
 		public:
 			loader(const char* path) { load(path); }
@@ -21,16 +21,18 @@ namespace myun2
 				if ( fp == NULL ) return false;
 				size = file_size(fp);
 				allocate(size);
-				fread(data.data(), 1, size, fp);
+				fread((void*)buffer.data(), 1, size, fp);
+				fclose(fp);
 				return true;
 			}
-			long fize_size(FILE* fp) {
+			long file_size(FILE* fp) {
 				fseek(fp, 0, SEEK_END);
 				return ftell(fp); }
 			void allocate(long size) {
-				data = ::std::string(size + 1, '\0');
+				buffer = ::std::string(size + 1, '\0');
 			}
-		}
+			const char* data() const { return buffer.data(); }
+		};
 	}
 }
 
