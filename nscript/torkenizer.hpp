@@ -16,8 +16,12 @@ namespace myun2
 				const char* p = data;
 				while(*p != '\0')
 				{
+
 					p++;
 				}
+			}
+			bool is_split_char(char c) {
+				if ( c == ' ' || c == '\t' || c == '\r' || c == '\n' ) return true;
 			}
 			bool is_symbol_char(char c) {
 				if ( c > ' ' && c < '0' ) return true;
