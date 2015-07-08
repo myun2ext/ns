@@ -10,12 +10,7 @@ namespace myun2
 	{
 		class torkenizer
 		{
-		private:
-			const char* separators;
-			const char* symbols;
 		public:
-			torkenizer(const char* sep_chars = " \t\r\n",
-					const char* symbol_chars = "{}[]\"'!#$%&()-=^~\|@`;+:*,<.>/?") : separators(sep_charas) {}
 			bool parse(const char* data)
 			{
 				const char* p = data;
@@ -23,6 +18,13 @@ namespace myun2
 				{
 					p++;
 				}
+			}
+			bool is_symbol_char(char c) {
+				if ( c > ' ' && c < '0' ) return true;
+				if ( c > '9' && c < 'A' ) return true;
+				if ( c > 'Z' && c < 'a' && c != '_' ) return true;
+				if ( c > 'z' && c <= '~' ) return true;
+				return false;
 			}
 		};
 	}
