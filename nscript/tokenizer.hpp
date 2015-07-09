@@ -18,19 +18,25 @@ namespace myun2
 				const char* p = data;
 				const char* token_started = data;
 				char c;
+				int prev_state = 0;
 
 				while((c = *p) != '\0')
 				{
-					if ( is_split_char(c) || is_symbol_char(c) ) {
+					int state = 0;
+					if ( is_split_char(c) ) state = 1;
+					if ( is_symbol_char(c) ) state = 2;
+
+					if ( state == 1 || state == 2 || prev_state != state ) {
 						unsigned long length = p - token_started;
 						if ( length != 0 ) {
 							::std::string token(token_started, length);
 							tokens.push_back(token);
 							token_started = p;
 						}
-						if ( is_split_char(c) )
+						if ( state == 1 )
 							token_started = p + 1;
 					}
+					prev_state = state;
 					p++;
 				}
 				return tokens;
