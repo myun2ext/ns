@@ -39,6 +39,13 @@ namespace myun2
 					prev_state = state;
 					p++;
 				}
+
+				unsigned long length = p - token_started;
+				if ( length != 0 ) {
+					::std::string token(token_started, length);
+					tokens.push_back(token);
+				}
+
 				return tokens;
 			}
 			bool is_split_char(char c) {
